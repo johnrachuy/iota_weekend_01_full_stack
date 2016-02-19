@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forms!</title>
+    <script type="text/javascript" src="/vendors/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/script.js"></script>
+    <link rel="stylesheet" href="/styles/stylesheet.css" />
+</head>
+<body>
+<h1>Employee Salary Tracker</h1>
+<div id="entryForm">
+    <form id="employeeForm">
+        <label for="empFirstName">First Name: </label>
+        <input type="text" id="empFirstName" name="empFirstName" />
+
+        <label for="empLastName">Last Name: </label>
+        <input type="text" id="empLastName" name="empLastName" />
+
+        <label for="empIDNumber">ID Number: </label>
+        <input type="text" id="empIDNumber" name="empIDNumber" />
+
+        <label for="empJobTitle">Job Title: </label>
+        <input type="text" id="empJobTitle" name="empJobTitle" />
+
+        <label for="empSalary">Salary: </label>
+        <input type="number" id="empSalary" name="empSalary" />
+
+        <button type="submit" id="submit" value="Submit Employee">Submit</button>
+    </form>
+</div>
+
+<div id="salaryTotal"><span id="salaryheading">Monthly Salary Total:</span><span id="salaryAmount">$0.00</span></div>
+
+<table id="person-table" style="width:100%">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Employee ID</th>
+        <th>Job Title</th>
+        <th>Salary</th>
+    </tr>
+</table>
+
+</body>
+</html>
