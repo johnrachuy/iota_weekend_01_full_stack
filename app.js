@@ -44,12 +44,13 @@ app.post('/employees', function(req, res) {
         last_name: req.body.empLastName,
         employee_id: req.body.empIDNumber,
         job_title: req.body.empJobTitle,
-        salary: req.body.empSalary
+        salary: req.body.empSalary,
+        active: "TRUE"
     };
 
     pg.connect(connectionString, function(err, client, done) {
-        client.query("INSERT INTO employees (first_name, last_name, employee_id, job_title, salary) VALUES ($1, $2, $3, $4, $5) RETURNING id",
-            [addEntry.first_name, addEntry.last_name, addEntry.employee_id, addEntry.job_title, addEntry.salary],
+        client.query("INSERT INTO employees (first_name, last_name, employee_id, job_title, salary, active) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
+            [addEntry.first_name, addEntry.last_name, addEntry.employee_id, addEntry.job_title, addEntry.salary, addEntry.active],
             function (err, result) {
                 done();
                 if(err) {
@@ -62,6 +63,31 @@ app.post('/employees', function(req, res) {
     });
 
 });
+
+//app.post('/remove_employee', function(req, res) {
+//    var removeEntry = {
+//        first_name: req.body.empFirstName,
+//        last_name: req.body.empLastName,
+//        employee_id: req.body.empIDNumber,
+//        job_title: req.body.empJobTitle,
+//        salary: req.body.empSalary
+//    };
+//
+//    pg.connect(connectionString, function(err, client, done) {
+//        console.log(removeEntry);
+//        //client.query("INSERT INTO employees (first_name, last_name, employee_id, job_title, salary) VALUES ($1, $2, $3, $4, $5) RETURNING id",
+//        //    [removeEntry.first_name, removeEntry.last_name, removeEntry.employee_id, removeEntry.job_title, removeEntry.salary],
+//        //    function (err, result) {
+//                done();
+//                if(err) {
+//                    console.log("Error inserting data: ", err);
+//                    res.send(false);
+//                } else {
+//                    res.send(result);
+//                }
+//            });
+//});
+
 
 app.get('/*', function(req, res) {
     var file = req.params[0] || '/views/index.html';

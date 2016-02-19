@@ -3,6 +3,7 @@
 
 $(document).ready(function() {
     $('#submit').on('click', postData);
+    //$('.#').on('click', removeEmployee);
 
     getData();
 });
@@ -23,6 +24,8 @@ function postData() {
 
     console.log(values);
 
+    //updateSalary(salaryTotal);
+
     $('input').val('');
 
     $.ajax({
@@ -41,28 +44,6 @@ function postData() {
     });
 
 }
-
-    //$('#employeeForm').on('submit', function(event) {
-    //    //event.preventDefault();
-    //    //var values = {};
-    //    //var thisEmpSalary = 0.00;
-    //
-    //    //$.each($('#employeeForm').serializeArray(), function(i, field) {
-    //    //    values[field.name] = field.value;
-    //    //});
-    //
-    //    //thisEmpSalary = parseFloat(values.empSalary);
-    //    //salaryTotal += Math.round(thisEmpSalary / 12);
-    //    //values.empSalary = Math.round(thisEmpSalary);
-    //
-    //    empArray.push(values);
-    //
-    //    $('#employeeForm').find('input[type=text], input[type=number]').val('');
-    //    $('#empFirstName').focus();
-    //
-    //    updateSalary(salaryTotal);
-    //    appendDom(values);
-    //});
 
 function getData() {
     $('.sql-data').remove();
@@ -83,39 +64,45 @@ function sendToDom(peopleData){
         var per = peopleData[person];
         //console.log(per);
 
-        $('#person-table').append('<tr class="sql-data"><td>' + per.first_name + '</td><td>' + per.last_name + '</td><td>' + per.employee_id + '</td><td>' + per.job_title + '</td><td>' + per.salary + '</td></tr>');
+        $('#person-table').append('<tr class="sql-data"><td>' + per.first_name + '</td><td>' + per.last_name + '</td><td>' + per.employee_id + '</td><td>' + per.job_title + '</td><td>' + per.salary + '</td><td>' + '<button id= "'+ per.id +'" class="removeEmployee">Remove Me!</button></td></tr>');
     }
 }
 
-    $('#container').on('click', '.removeEmployee', function() {
-        var index = $(this).data().id;
-        var employee = empArray[index];
-        console.log("This Employee:", employee);
+//function removeEmployee(){
+//    event.preventDefault();
+//
+//    var values = {};
+//
+//    $.each($('#person-table').serializeArray(), function(i, field) {
+//        values[field.name] = field.value;
+//    });
+//
+//    console.log(values);
+//
+//    $.ajax({
+//        type: 'POST',
+//        url: '/remove_employee',
+//        data: values,
+//
+//        success: function(data) {
+//            if(data) {
+//                // everything went ok
+//                console.log('from server:', data);
+//                updateSalary();
+//            } else {
+//                console.log('error');
+//            }
+//        }
+//    });
+//
+//        //salaryTotal -= Math.round(employee.empSalary / 12);
+//        //updateSalary(salaryTotal);
+//
+//        $(this).parent().remove();
+//}
 
-        salaryTotal -= Math.round(employee.empSalary / 12);
-        updateSalary(salaryTotal);
-
-        $(this).parent().remove();
-    });
-
-    function updateSalary(salary) {
-        $('#salaryAmount').text('$ ' + salary);
-    }
-
-
-    function appendDom(empInfo) {
-        $('#container').append('<div></div>');
-        var $el = $('#container').children().last();
-        $el.append('<p>' + empInfo.empFirstName + ' ' + empInfo.empLastName + '</p>');
-        $el.append('<p>' + empInfo.empIDNumber + '</p>');
-        $el.append('<p>' + empInfo.empJobTitle + '</p>');
-        $el.append('<p>$' + empInfo.empSalary + '</p>');
-
-        $el.append('<button class="removeEmployee" data-id="' +
-            (empArray.length - 1) + '">Remove Me!</button>');
-
-
-
-    }
+//function updateSalary(salary) {
+//        $('#salaryAmount').text('$ ' + salary);
+//    }
 
 
